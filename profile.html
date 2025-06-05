@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthwave - Profile</title>
+    <style>
+        .profile-page {
+            width: 50%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+       
+        }
+        
+        .profile-page h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2364a0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        
+                }
+        
+        button:hover {
+            background-color:#2364a0;
+        }
+
+       
+        </style>
+        <link rel="stylesheet" href="style.css">
+</head>
+<body background="https://can-sim.ca/wp-content/uploads/2022/04/Safe-oral-medication-administration.jpeg">
+    <header>
+        <h1>HEALTH WAVE</h1>
+        <nav>
+            <ul>
+                <li><a href="Home page.html">Home</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="signin.html">sign out</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="profile-page">
+        <h2>Profile</h2>
+        <form id="profileForm">
+            <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" value="Meghana" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="b.meghana7474@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" value="8179594217" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" rows="3" required>RK Building kattamanchi chittoor</textarea>
+            </div>
+
+            <button type="submit">Save Changes</button>
+        </form>
+
+        
+    </section>
+
+    <footer>
+        <p>© 2024 Healthwave | All Rights Reserved</p>
+    </footer>
+
+    <script>
+    document.getElementById('profileForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form from submitting
+    
+        // Get form values
+        const fullName = document.getElementById('fullName').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const address = document.getElementById('address').value;
+    
+        // Display the updated profile details (You can replace this with an AJAX call to save the data to a database)
+        alert(`Profile Updated!\n\nName: ${fullName}\nEmail: ${email}\nPhone: ${phone}\nAddress: ${address}`);
+    });
+
+   
+    </script>
+    
+</body>
+</html>

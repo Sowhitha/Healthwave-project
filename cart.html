@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthwave - Cart</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cart-container {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 800px;
+            height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: transparent;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-controls button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            background-color: #2364a0;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .quantity-controls span {
+            width: 30px;
+            text-align: center;
+        }
+
+        #clearCart, .btn {
+            padding: 10px 20px;
+            background-color: #2364a0;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn {
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #235392;
+        }
+
+        #totalAmount {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body background="https://can-sim.ca/wp-content/uploads/2022/04/Safe-oral-medication-administration.jpeg">
+    <header>
+        <h1>HEALTH WAVE</h1>
+        <nav>
+            <ul>
+                <li><a href="Home page.html">Home</a></li>
+                <li><a href="product.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+                <li><a href="signin.html">Sign Out</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="cart-container">
+        <h2>Items in your cart:</h2>
+        <div id="cartItems"></div>
+        <button id="clearCart">Clear Cart</button>
+        <a href="checkout.html" class="btn">Proceed to Checkout</a>
+        <div id="totalAmount">Total: $0.00</div>
+    </div>
+
+    <script>
+        // Retrieve cart items from localStorage or initialize empty array
+        let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsContainer = document.getElementById('cartItems');
+        const totalAmountElement = document.getElementById('totalAmount');
+
+        // Function to update the total amount displayed
+        function updateTotal() {
+            const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            totalAmountElement.innerText = `Total: $${totalAmount.toFixed(2)}`;
+        }
+
+        // Function to render cart items with quantity control
+        function renderCartItems() {
+            cartItemsContainer.innerHTML = ""; // Clear existing items
+
+            if (cartItems.length > 0) {
+                cartItems.forEach((item, index) => {
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('cart-item');
+
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div>
+                            <p>${item.name}</p>
+                            <p id="price-${index}">Price: $${(item.price * item.quantity).toFixed(2)}</p>
+                        </div>
+                        <div class="quantity-controls">
+                            <button onclick="decreaseQuantity(${index})">-</button>
+                            <span id="quantity-${index}">${item.quantity}</span>
+                            <button onclick="increaseQuantity(${index})">+</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                });
+            } else {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+            }
+            updateTotal();
+        }
+
+        // Increase quantity
+        function increaseQuantity(index) {
+            cartItems[index].quantity++;
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            renderCartItems();
+        }
+
+        // Decrease quantity
+        function decreaseQuantity(index) {
+            if (cartItems[index].quantity > 1) {
+                cartItems[index].quantity--;
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+                renderCartItems();
+            }
+        }
+
+        // Clear cart functionality
+        const clearCartButton = document.getElementById('clearCart');
+        clearCartButton.addEventListener('click', () => {
+            cartItems = []; // Reset cart items array
+            localStorage.removeItem('cart'); // Clear from localStorage
+            renderCartItems(); // Re-render cart items
+        });
+
+        // Initial render on page load
+        renderCartItems();
+    </script>
+
+    <footer>
+        <p>© 2024 Healthwave | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

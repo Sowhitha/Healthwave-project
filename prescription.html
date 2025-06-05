@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthwave - Upload Prescription</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .upload-prescription, .required-product {
+            background-color: white;
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .upload-prescription h2, .required-product h2 {
+            text-align: center;
+            color: #0b0c0b;
+        }
+
+        .upload-prescription form, .required-product {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .upload-prescription button, .required-product .btn {
+            background-color: #2364a0;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .success-message {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #dff0d8;
+            color: #040404;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .required-product {
+            display: none; /* Hide initially */
+        }
+    </style>
+</head>
+<body background="https://can-sim.ca/wp-content/uploads/2022/04/Safe-oral-medication-administration.jpeg">
+    <header>
+        <h1>HEALTH WAVE</h1>
+        <nav>
+            <ul>
+                <li><a href="Home page.html">Home</a></li>
+                <li><a href="product.html">Products</a></li>
+                <li><a href="prescription.html">Upload Prescription</a></li>
+                <li><a href="profile.html">My profile</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="signin.html">sign out</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="upload-prescription">
+        <h2>Upload Prescription</h2>
+        <form id="prescriptionForm" action="/upload" method="post" enctype="multipart/form-data">
+            <label for="prescription">Choose File:</label>
+            <input type="file" id="prescription" name="prescription" accept=".pdf, .jpg, .png">
+            <button type="submit">Upload</button>
+        </form>
+    </section>
+
+    <!-- Success message -->
+    <div id="successMessage" class="success-message" style="display: none;">
+        Prescription uploaded successfully!
+    </div>
+
+    <!-- Required Product Section -->
+    <section class="required-product" id="requiredProduct">
+        <h2>Required Product</h2>
+        <p><strong>Product Name:</strong> HealthWave Medicine</p>
+        <p><strong>Price:</strong> $29.99</p>
+        <button class="btn" onclick="addToCart()">Add to Cart</button>
+    </section>
+
+    <script>
+        // JavaScript to show success message and required product
+        document.getElementById("prescriptionForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission for demo
+
+            setTimeout(function() {
+                document.getElementById("successMessage").style.display = "block"; // Show success message
+                document.getElementById("prescriptionForm").reset(); // Clear the form
+
+                // Show the required product section
+                document.getElementById("requiredProduct").style.display = "block";
+            }, 1000);
+        });
+
+        // Function to add required product to cart
+        function addToCart() {
+            const product = { name: "HealthWave Medicine", price: 29.99 };
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert("Product added to cart!");
+        }
+    </script>
+
+    <footer class="footer">
+        <p>© 2024 Healthwave | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

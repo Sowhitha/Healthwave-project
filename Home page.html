@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthwave- Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+         
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.product-item {
+    background-color: #fff;
+    border: 1px solid#fff;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+
+.product-item h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+
+.product-item p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #0b0c0d;
+}
+
+
+    
+        .product-name {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #333;
+        }
+        .product-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ff5722;
+        }
+        .add-to-cart{
+            display:inline-block;
+            margin: 10px 0;
+            padding: 8px 16px;
+            background-color:#0056b3;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            
+        }
+        .add-to-cart:hover {
+            background-color: #2364a0;
+           
+        }
+        /* Filters Section */
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        .filters select, .filters input[type="search"] {
+            padding: 8px;
+            width: 30%;
+        }
+        .carousel-inner {
+  height: 500px; /* Adjust this height to whatever suits your design */
+  width: 100%;
+  object-fit:cover;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+            <h1>HEALTH WAVE</h1>
+        <nav>
+            <ul>
+                <li><a href="Home page.html">Home</a></li>
+                <li><a href="about page.html">About us</a></li>
+                <li><a href="contact.html">contact</a></li>
+                <li><a href="product.html">Products</a></li>
+                <li><a href="prescription.html">Upload Prescription</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="profile.html">profile</a></li>
+                <li><a href="signin.html">sign out</a></li>
+               
+            </ul>
+        </nav>
+    </header>
+           
+    <div class="container">
+    <section class="hero">
+        <h1>Welcome to Healthwave</h1>
+        <p>Your one-stop solution for medications and healthcare products.</p>
+        <a href="product.html" class="btn">Shop Now</a>
+    </section>
+    <div class="container">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+      
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <div class="item active">
+              <img src="https://epomedicine.com/wp-content/uploads/2021/12/pharmacy.jpg" alt="pharmacy 1" >
+            </div>
+      
+            <div class="item">
+              <img src="https://www.communitypharmacyni.co.uk/wp-content/uploads/2020/07/pharmacist_with_medication_basket.jpg" alt="pharmacy 2" >
+            </div>
+          
+            <div class="item">
+              <img src="https://eliteextra.com/wp-content/uploads/2022/02/AdobeStock_432533244-2048x1152.jpeg" alt="Fast delivery" >
+            </div>
+          </div>
+      
+          <!-- Left and right controls -->
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+
+        <div class="filters">
+            <input type="search" id="searchBar" placeholder="Search products...">
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="OTC">OTC</option>
+                <option value="Prescription">Prescription</option>
+                <option value="Supplements">Supplements</option>
+            </select>
+            <select id="priceFilter">
+                <option value="">Sort by Price</option>
+                <option value="low-high">Low to High</option>
+                <option value="high-low">High to Low</option>
+            </select>
+        </div>
+    
+        
+        <div class="product-grid" id="productGrid">
+            
+        </div>
+    </div>
+   
+
+    
+    <script>
+      const products = [
+    { name: "Amoxicillin 500mg Capsules", price: 12.99, image: "https://5.imimg.com/data5/SELLER/Default/2024/4/406292474/JW/VO/CC/148088081/product-jpeg-5-500x500.jpg" },
+    { name: "Atorvastatin 10mg Tablets", price: 9.99,  image: "https://th.bing.com/th/id/OIP.VNdBgNgTBn9CKlVdsid6JgHaFo?rs=1&pid=ImgDetMain"},
+    { name: "Ibuprofen 200mg Tablets", price: 5.49, image: "https://cdn.shopify.com/s/files/1/0288/2820/5189/products/Screen_Shot_2020-02-01_at_5.46.27_PM.png?v=1580597293" },
+    { name: "Metformin 500mg Tablets", price: 8.99, image: "https://www.xalmeds.com/cdn/shop/products/0825795E-955F-42CB-AEA9-7F10A0B26823_1500x.png?v=1678244573" },
+    { name: "Omeprazole 20mg Capsules", price: 7.99, image: "https://th.bing.com/th/id/OIP.wGMNx8zciQlCVZ-oyK_h-QHaHa?rs=1&pid=ImgDetMain" },
+    { name: "Acetaminophen 500mg Tablets", price: 4.99, image: "https://th.bing.com/th/id/OIP.jBTML-jEagEbZgYa9MLENAHaHa?w=600&h=600&rs=1&pid=ImgDetMain" },
+    { name: "Amlodipine 5mg Tablets", price: 6.99, image: "https://th.bing.com/th/id/OIP.lipLdcOQHs424QOr1Qg1MAHaFE?w=2560&h=1754&rs=1&pid=ImgDetMain"},
+    { name: "Losartan 50mg Tablets", price: 10.49, image: "https://www.bbukltd.com/wp-content/uploads/2015/08/Losartan-50mg-Tabs-28s-2-Copy.jpg" },
+    { name: "Levothyroxine 50mcg Tablets", price: 8.49, image: "https://www.assetpharmacy.com/wp-content/uploads/2017/09/levothyroxine-50mcg-tablets-buy-online-uk-300x295.jpg" },
+    { name: "Simvastatin 20mg Tablets", price: 9.49, image: "https://th.bing.com/th/id/OIP._8AS1g60Rh130gwZoCWV5AHaFd?rs=1&pid=ImgDetMain"},
+    { name: "Lisinopril 10mg Tablets", price: 7.49, image: "https://www.bbukltd.com/wp-content/uploads/2016/01/Lisinopril-10mg-Tabs-28s-2-Copy.jpg" },
+    { name: "Fluoxetine 20mg Capsules", price: 9.99, image: "https://th.bing.com/th/id/OIP.EGKDRqAkna2wmf8gnfFcMgHaFu?rs=1&pid=ImgDetMain" },
+    { name: "Montelukast 10mg Tablets", price: 11.49, image: "https://5.imimg.com/data5/TH/PY/MY-6299000/montel-10.jpg" },
+    { name: "Naproxen 500mg Tablets", price: 6.99, image: "https://5.imimg.com/data5/SELLER/Default/2022/4/TD/DD/BI/79326067/naproxen-500-1000x1000.jpg" },
+    { name: "Prednisone 10mg Tablets", price: 5.99, image: "https://www.worldpharmameds.com/wp-content/uploads/2021/01/Prednisone-10MG.jpg" },
+    { name: "Albuterol Inhaler", price: 19.99, image: "https://th.bing.com/th/id/R.adbbbca8aafa972990ac74f7158ff8d6?rik=dBuPgJbVCvaDpw&riu=http%3a%2f%2fwww.allivet.com%2fimages%2fproduct%2flarge%2f7665.jpg&ehk=hgjDkqQ42uzu4XvJ98Y7GG8brEjwuJkVD7MXbCvrilU%3d&risl=&pid=ImgRaw&r=0" },
+    { name: "Metoprolol 25mg Tablets", price: 8.99, image: "https://i0.wp.com/tajgenerics.com/wp-content/uploads/metoprolol-succinate-extended-release-tablets-USP-25-mg-Metorol-XL-25-Taj-Pharma-10-scaled.jpg?w=2560&ssl=1" },
+    { name: "Hydrochlorothiazide 25mg Tablets", price: 6.99, image:"https://www.assetpharmacy.com/wp-content/uploads/2022/06/Hydrochlorothiazide-25mg-Tablets-1.jpg" },
+    { name: "Furosemide 40mg Tablets", price: 9.49, image: "https://th.bing.com/th/id/OIP.fA9Ty9lyh_-pjqobyoKofgAAAA?rs=1&pid=ImgDetMainE" },
+    { name: "Zolpidem 10mg Tablets", price: 12.49, image: "https://ryvispharma.com/wp-content/uploads/2020/12/752-4.jpg" },
+    { name: "Clopidogrel 75mg Tablets", price: 13.49, image: "https://th.bing.com/th/id/OIP.W978FtMVo8Z6DaTrLXM_jAAAAA?rs=1&pid=ImgDetMain" },
+    { name: "Gabapentin 300mg Capsules", price: 7.49, image: "https://www.bbukltd.com/wp-content/uploads/2015/08/Gabapentin-300mg-caps-100s-2-Copy.jpg" },
+    { name: "Bupropion 150mg Tablets", price: 14.99, image: "https://5.imimg.com/data5/SELLER/Default/2022/9/OO/VS/TT/126775648/bupropion-hydrochloride-extended-release-tablets-usp-1000x1000.jpg" },
+    { name: "Citalopram 20mg Tablets", price: 8.49, image: "https://www.emedbucket.com/emedpro_img/uploads/product/main/healthglowpharmacy/1599229186_2826_3.jpeg" },
+    { name: "Glipizide 10mg Tablets", price: 9.99, image: "https://cpimg.tistatic.com/07654919/b/4/Glynase-XL-Glipizide-10mg-Tablets.jpg" },
+
+    ]
+       
+       
+        function displayProducts(productList) {
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = ''; 
+    
+            productList.forEach(product => {
+                const productItem = document.createElement('div');
+                productItem.classList.add('product-item');
+                productItem.setAttribute('data-category', product.category);
+                
+                productItem.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <p class="product-name">${product.name}</p>
+                    <p class="product-price">$${product.price}</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                `;
+    
+                productGrid.appendChild(productItem);
+
+    // Add event listener for the "Add to Cart" button
+    const addToCartButton = productItem.querySelector('.add-to-cart');
+    addToCartButton.addEventListener('click', () => {
+        addToCartButton.textContent = 'Added to Cart';
+        addToCartButton.disabled = true; 
+        addToCartButton.style.backgroundColor = '#28a745'; 
+
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        cartItems.push(product);
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+
+    });
+            });
+        }
+    
+        displayProducts(products);
+    
+        
+        document.getElementById('searchBar').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const filteredProducts = products.filter(product => product.name.toLowerCase().includes(query));
+            displayProducts(filteredProducts);
+        });
+    
+
+        document.getElementById('categoryFilter').addEventListener('change', function() {
+            const category = this.value;
+            const filteredProducts = category ? products.filter(product => product.category === category) : products;
+            displayProducts(filteredProducts);
+        });
+    
+        
+        document.getElementById('priceFilter').addEventListener('change', function() {
+            const sortOption = this.value;
+            let sortedProducts = [...products];
+            
+            if (sortOption === 'low-high') {
+                sortedProducts.sort((a, b) => a.price - b.price);
+            } else if (sortOption === 'high-low') {
+                sortedProducts.sort((a, b) => b.price - a.price);
+            }
+    
+            displayProducts(sortedProducts);
+        });
+        
+    
+    </script>
+      <footer>
+        <p>© 2024 Healthwave  | All Rights Reserved</p>
+    </footer>
+   
+</body>
+</html>
+

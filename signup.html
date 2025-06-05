@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://www.bridgemi.com/sites/default/files/styles/full_width_image/public/hero_images/hospital.jpg?itok=s9wdM5uk");
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .signup-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        .signup-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .signup-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .signup-container input[type="text"],
+        .signup-container input[type="tel"],
+        .signup-container input[type="email"],
+        .signup-container input[type="password"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .signup-container input[type="button"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #2364a0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .signup-container input[type="button"]:hover {
+            background-color: #1a4d80;
+        }
+        h1 {
+            color: #2364a0;
+            font-family: 'Times New Roman', Times, serif;
+        }
+    </style>
+    <script>
+        function validateSignUp() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (name && email && phone && password && confirmPassword) {
+                if (password === confirmPassword) {
+                    // Save the user's details to localStorage
+                    localStorage.setItem('name', name);
+                    localStorage.setItem('email', email);
+                    localStorage.setItem('phone', phone);
+                    localStorage.setItem('password', password);
+
+                    alert('Account created successfully!');
+                    window.location.href = 'signin.html'; // Redirect to sign-in page
+                } else {
+                    alert('Passwords do not match.');
+                }
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="signup-container">
+        <h1 align="center">HEALTHWAVE</h1>
+        <h2>Sign Up</h2>
+        
+            <form action="Database.php" method="post">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone No:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+
+            <input type="button" value="Sign Up" onclick="validateSignUp()">
+        </form>
+    </div>
+</body>
+</html>
+
